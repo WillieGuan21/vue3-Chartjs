@@ -2,6 +2,9 @@
     <div style="width: 100%;height:20%;display: block;">
       <vue3-chart-js v-bind="{...barChart}"  @after-update="afterUpdate"/>
     </div>
+    <div style="width: 100%;height:20%;display: block; margin:40px 0px">
+      <vue3-chart-js v-bind="{...willChart}"  @after-update="afterUpdate"/>
+    </div>
     <div style="display: block;">
       <vue3-chart-js ref="chartRef" v-bind="{...localDoughnutChartOptions}" @after-update="afterUpdate"/>
     </div>
@@ -48,6 +51,47 @@ export default {
             }
           }
         }
+      }
+    }
+
+    const willChart = {
+      type: 'bar',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+        datasets: [{
+          label: '12 Months Cash Flow',
+          data: [-2153120, -109620, -141120, -111720, -57120, -36120,  -4620,-4620, 47880, 89880, 68880, 103880],
+          fill: true,
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor:["#F93154","#F93154","#F93154","#F93154","#F93154","#F93154","#F93154","#F93154",'#00B74A','#00B74A','#00B74A','#00B74A'],
+          tension: 0.1
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        plugins: {
+          zoom: {
+            zoom: {
+              wheel: {
+                enabled: true,
+                mode: 'xy',
+              },
+              pinch: {
+                enabled: true,
+                mode: 'xy',
+              }
+            }
+          },
+        },
+        scales:{
+          x:{},
+          y:{
+            type: 'linear',
+            min: -220000,
+            max: 120000
+            }
+        }
+        
       }
     }
 
@@ -143,7 +187,8 @@ export default {
       beforeUpdate,
       afterUpdate,
       testFunc,
-      chartRef
+      chartRef,
+      willChart
     }
   },
 }
